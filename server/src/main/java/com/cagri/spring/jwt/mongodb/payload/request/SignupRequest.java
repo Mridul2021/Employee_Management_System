@@ -21,6 +21,9 @@ public class SignupRequest {
     @Size(min = 6, max = 40)
     private String password;
 
+    @NotBlank // Make role mandatory
+    private String role;
+
     // Optional fields
     private Boolean isActive;
     private Map<String, Object> information;
@@ -30,11 +33,12 @@ public class SignupRequest {
     public SignupRequest() {}
 
     // Parameterized constructor
-    public SignupRequest(String username, String email, String password, Boolean isActive,
+    public SignupRequest(String username, String email, String password, String role, Boolean isActive,
                          Map<String, Object> information, List<Map<String, Object>> leaves) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role = role;
         this.isActive = isActive;
         this.information = information;
         this.leaves = leaves;
@@ -63,6 +67,14 @@ public class SignupRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Boolean getIsActive() {
