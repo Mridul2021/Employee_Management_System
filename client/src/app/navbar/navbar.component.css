@@ -1,0 +1,5 @@
+/* Additional styling to ensure smooth transition */
+.translate-x-full {
+    transform: translateX(100%);
+  }
+  

@@ -1,0 +1,50 @@
+<nav class="w-full bg-white flex justify-between px-4 md:px-8 items-center py-3">
+  <div>
+    <div class="text-4xl text-orange-600 font-bold">Chubb</div>
+  </div>
+
+  <ul *ngIf="isLoggedIn" class="md:flex font-semibold hidden">
+    <li class="px-[10px] cursor-pointer hover:text-green-800">Home▾</li>
+    <li class="px-[10px] cursor-pointer hover:text-green-800">Pages▾</li>
+    <li class="px-[10px] cursor-pointer hover:text-green-800">Insurances▾</li>
+    <li class="px-[10px] cursor-pointer hover:text-green-800">Blog▾</li>
+    <li class="px-[10px] cursor-pointer hover:text-green-800">ContactUs</li>
+  </ul>
+
+  <a *ngIf="!isLoggedIn" href="/login" class="hidden md:block bg-green-800 p-2 px-3 text-white border rounded-xl">Login</a>
+
+  <div *ngIf="isLoggedIn" class="flex mp-4">
+    <div class="text-2xl text-blue-600 font-bold mx-4">{{ user?.username }}</div>
+    <button (click)="logout()" class="hidden md:block bg-green-800 p-2 px-3 text-white border rounded-xl">
+      Logout
+    </button>
+    
+  </div>
+
+  <div class="md:hidden">
+    <a *ngIf="!isLoggedIn" href="/login" class="bg-green-800 p-2 px-3 text-white border rounded-xl">Login</a>
+    <button *ngIf="isLoggedIn" (click)="toggleDrawer()" class="text-gray-600 hover:text-green-600 focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<div [class.translate-x-full]="!drawerOpen" class="fixed inset-y-0 right-0 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 md:hidden">
+  <div class="p-4">
+    <button (click)="toggleDrawer()" class="text-gray-600 hover:text-red-600 focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <h2 class="text-2xl font-semibold text-green-600 mb-4">Menu</h2>
+    <a href="#" class="block text-gray-600 hover:text-green-600 mb-2">Home</a>
+    <a href="#" class="block text-gray-600 hover:text-green-600 mb-2">Pages</a>
+    <a href="#" class="block text-gray-600 hover:text-green-600 mb-2">Insurances</a>
+    <a href="#" class="block text-gray-600 hover:text-green-600 mb-2">Blog</a>
+    <a href="#" class="block text-gray-600 hover:text-green-600 mb-2">Contact Us</a>
+    <a *ngIf="!isLoggedIn" href="/login" class="bg-green-800 p-2 px-3 text-white border rounded-xl">Login</a>
+    <button *ngIf="isLoggedIn" (click)="logout()" class="bg-green-800 p-2 px-3 text-white border rounded-xl">Logout</button>
+  </div>
+</div>

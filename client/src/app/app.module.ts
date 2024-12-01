@@ -12,8 +12,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardUserComponent } from './board-user/board-user.component';
-
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
+import { NavbarComponent } from "./navbar/navbar.component";
 
 @NgModule({
   declarations: [
@@ -24,14 +24,15 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
     ProfileComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
-    BoardUserComponent
+    BoardUserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    NavbarComponent
+],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
