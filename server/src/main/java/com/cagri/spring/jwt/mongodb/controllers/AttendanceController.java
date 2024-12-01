@@ -48,4 +48,11 @@ public class AttendanceController {
         attendanceService.deleteAttendance(id);
         return ResponseEntity.noContent().build();
     }
+    // Get attendance by username
+    @GetMapping("/user/{userName}")
+    public ResponseEntity<List<Attendance>> getAttendanceByUserName(@PathVariable String userName) {
+        List<Attendance> attendances = attendanceService.getAttendancesByUserName(userName);
+        return attendances.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(attendances);
+    }
+
 }

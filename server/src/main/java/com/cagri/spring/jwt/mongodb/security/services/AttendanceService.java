@@ -18,6 +18,10 @@ public class AttendanceService {
     // Create or update attendance entry
     public Attendance createAttendance(Attendance attendance) {
         attendance.setTimestamp(LocalDateTime.now()); // Automatically set timestamp on post request
+        Optional<Attendance> existingAttendance = attendanceRepository.findByDate(attendance.getDate());
+        if (existingAttendance.isPresent()) {
+            throw new IllegalArgumentException("Attendance for this date (" + attendance.getDate() + ") already exists.");
+        }
         return attendanceRepository.save(attendance);
     }
 
@@ -46,4 +50,9 @@ public class AttendanceService {
     public void deleteAttendance(String id) {
         attendanceRepository.deleteById(id);
     }
+    // Add this method to the AttendanceService class
+    public List<Attendance> getAttendancesByUserName(String userName) {
+        return attendanceRepository.findByUserName(userName); // Assuming the repository method exists
+    }
+
 }

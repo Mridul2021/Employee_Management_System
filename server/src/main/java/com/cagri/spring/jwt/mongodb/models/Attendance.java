@@ -2,7 +2,7 @@ package com.cagri.spring.jwt.mongodb.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import  com.cagri.spring.jwt.mongodb.security.services.AttendanceService;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
