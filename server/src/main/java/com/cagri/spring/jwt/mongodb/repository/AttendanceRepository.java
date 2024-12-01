@@ -10,5 +10,5 @@ import java.time.LocalDate; // Import LocalDate
 @Repository
 public interface AttendanceRepository extends MongoRepository<Attendance, String> {
     List<Attendance> findByUserName(String userName);
-    Optional<Attendance> findByDate(LocalDate date);
+    Optional<Attendance> findByDateAndUserName(LocalDate date, String userName);
 }

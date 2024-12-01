@@ -125,4 +125,14 @@ public class AuthController {
 
 		return ResponseEntity.ok(new MessageResponse("Password changed successfully!"));
 	}
+	@PostMapping("/signout")
+	public ResponseEntity<?> logoutUser() {
+		// Clear the authentication from SecurityContext
+		SecurityContextHolder.clearContext();
+
+		// Optionally, you can implement a token blacklist or invalidation mechanism if required
+		// For now, we just clear the authentication context
+
+		return ResponseEntity.ok(new MessageResponse("User logged out successfully!"));
+	}
 }

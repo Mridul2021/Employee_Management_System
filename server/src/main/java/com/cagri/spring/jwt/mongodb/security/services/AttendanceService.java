@@ -18,9 +18,9 @@ public class AttendanceService {
     // Create or update attendance entry
     public Attendance createAttendance(Attendance attendance) {
         attendance.setTimestamp(LocalDateTime.now()); // Automatically set timestamp on post request
-        Optional<Attendance> existingAttendance = attendanceRepository.findByDate(attendance.getDate());
+        Optional<Attendance> existingAttendance = attendanceRepository.findByDateAndUserName(attendance.getDate(), attendance.getUserName());
         if (existingAttendance.isPresent()) {
-            throw new IllegalArgumentException("Attendance for this date (" + attendance.getDate() + ") already exists.");
+            throw new IllegalArgumentException("Attendance for this date (" + attendance.getDate() + ") and user (" + attendance.getUserName() + ") already exists.");
         }
         return attendanceRepository.save(attendance);
     }
