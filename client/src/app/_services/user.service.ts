@@ -53,4 +53,11 @@ export class UserService {
       headers: this.createHeaders(),
     });
   }
+  deleteUser(username: string): Observable<any> {
+    return this.http.delete(`http://localhost:8080/api/user/delete/${username}`, {
+      headers: this.createHeaders(),
+      responseType: 'text',
+    });
+  }
+  
 }

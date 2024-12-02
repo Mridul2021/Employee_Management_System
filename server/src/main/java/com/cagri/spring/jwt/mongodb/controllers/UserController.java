@@ -128,6 +128,20 @@ public class UserController {
         return "User status updated successfully!";
     }
 
+    // Method to delete a user by username
+    @DeleteMapping("/delete/{username}")
+    public String deleteUser(@PathVariable("username") String username) {
+        // Find the user by username
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Error: User not found!"));
+
+        // Delete the user from the repository
+        userRepository.delete(user);
+
+        return "User deleted successfully!";
+    }
+
+
     //return all data
     // Method to get all users' data
     @GetMapping("/all")
