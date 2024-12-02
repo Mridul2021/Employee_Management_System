@@ -128,6 +128,14 @@ public class UserController {
         return "User status updated successfully!";
     }
 
+    //return all data
+    // Method to get all users' data
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+
     // Helper method to get the username of the currently authenticated user
     private String getAuthenticatedUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
