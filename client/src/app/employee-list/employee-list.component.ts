@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service'; // Adjust import as necessary
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
@@ -12,7 +13,7 @@ export class EmployeeListComponent implements OnInit {
   employeeToDelete: any = null; // For tracking the employee to be deleted
   showDeleteModal: boolean = false; // For toggling delete modal
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchEmployees();
@@ -69,5 +70,10 @@ export class EmployeeListComponent implements OnInit {
         }
       );
     }
+  }
+
+  // Edit employee
+  editEmployee(username: string): void {
+    this.router.navigate(['/edit', username]);
   }
 }

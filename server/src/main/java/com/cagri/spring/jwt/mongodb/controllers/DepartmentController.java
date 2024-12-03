@@ -1,6 +1,7 @@
 package com.cagri.spring.jwt.mongodb.controllers;
-import com.cagri.spring.jwt.mongodb.repository.UserRepository;
+
 import com.cagri.spring.jwt.mongodb.models.User;
+import com.cagri.spring.jwt.mongodb.repository.UserRepository;
 import com.cagri.spring.jwt.mongodb.models.Department;
 import com.cagri.spring.jwt.mongodb.security.services.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/department")
 public class DepartmentController {
@@ -22,6 +24,7 @@ public class DepartmentController {
 
     @Autowired
     private UserRepository userRepository;
+
     // Create department entry
     @PostMapping
     public ResponseEntity<Department> createDepartment(@RequestBody Department department) {
@@ -91,10 +94,12 @@ public class DepartmentController {
                 .map(GrantedAuthority::getAuthority)
                 .orElse(null);
     }
+
     private String getAuthenticatedUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
     }
+
     private String getRoleByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Error: User not found!"));

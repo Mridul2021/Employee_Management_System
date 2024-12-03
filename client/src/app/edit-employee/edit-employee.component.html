@@ -1,0 +1,128 @@
+<div class="w-full max-w-md mx-auto mt-12">
+    <div class="bg-gray-100 p-8 rounded-md shadow-md">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Row 1: Username and Email -->
+        <div class="mb-4 flex gap-4">
+          <div class="flex-1">
+            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+            <input
+              type="text"
+              id="username"
+              [value]="username"
+              class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              [readonly]="true"
+            />
+          </div>
+        </div>
+  
+        <!-- Row 2: Password and Role -->
+        <div class="mb-4 flex gap-4">
+            <div class="flex-1">
+                <label for="DateOfJoining" class="block text-sm font-medium text-gray-700">Date of Joining</label>
+                <input
+                  type="date"
+                  id="DateOfJoining"
+                  formControlName="DateOfJoining"
+                  class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                />
+              </div>
+          <div class="flex-1">
+            <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+            <select
+              id="role"
+              formControlName="role"
+              class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
+  
+        <!-- Row 3: Employee Info -->
+        <div formGroupName="information" class="mb-4">
+          <div>
+            <label for="EmployeeId" class="block text-sm font-medium text-gray-700">Employee ID</label>
+            <input
+              type="text"
+              id="EmployeeId"
+              formControlName="EmployeeId"
+              class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            />
+          </div>
+  
+          <!-- Row 4: Name and Phone -->
+          <div class="mb-4 flex gap-4">
+            <div class="flex-1">
+              <label for="Name" class="block text-sm font-medium text-gray-700">Name</label>
+              <input
+                type="text"
+                id="Name"
+                formControlName="Name"
+                class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              />
+            </div>
+            <div class="flex-1">
+              <label for="Phone" class="block text-sm font-medium text-gray-700">Phone</label>
+              <input
+                type="text"
+                id="Phone"
+                formControlName="Phone"
+                class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              />
+            </div>
+          </div>
+  
+          <!-- Row 5: Job Title and Department -->
+          <div class="mb-4 flex gap-4">
+            <div class="flex-1">
+              <label for="JobTitle" class="block text-sm font-medium text-gray-700">Job Title</label>
+              <input
+                type="text"
+                id="JobTitle"
+                formControlName="JobTitle"
+                class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              />
+            </div>
+            <div class="flex-1">
+              <label for="DepartmentName" class="block text-sm font-medium text-gray-700">Department</label>
+              <input
+                type="text"
+                id="DepartmentName"
+                formControlName="DepartmentName"
+                class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              />
+            </div>
+          </div>
+
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="mb-4">
+          <button
+            type="submit"
+            class="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          >
+            Update Details
+          </button>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Dialog Box -->
+    <div
+      *ngIf="showDialog"
+      class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50"
+    >
+      <div class="bg-white w-96 p-6 rounded-md shadow-lg text-center">
+        <h2 class="text-lg font-medium text-gray-700">{{ dialogMessage }}</h2>
+        <button
+          (click)="onDialogClose()"
+          class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+  

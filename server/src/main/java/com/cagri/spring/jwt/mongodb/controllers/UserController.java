@@ -1,12 +1,12 @@
 package com.cagri.spring.jwt.mongodb.controllers;
-
+import java.util.HashMap;
 import com.cagri.spring.jwt.mongodb.models.User;
 import com.cagri.spring.jwt.mongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,24 +43,28 @@ public class UserController {
     // Method to update user information
     @PutMapping("/updateInfo/{username}")
     public String updateUserInformation(@PathVariable("username") String username, @RequestBody Map<String, Object> updatedInformation) {
-        // Get the currently authenticated username from the JWT token
-        String currentUsername = getAuthenticatedUsername();
-
-        // Check if the username in the path matches the authenticated user
-        if (!currentUsername.equals(username)) {
-            return "Error: Unauthorized access!";
-        }
-
         // Find the user by username
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Error: User not found!"));
 
-        // Update the information field with the new data
-        user.setInformation(updatedInformation);
+        // Clear the existing information
+        user.setInformation(new HashMap<>()); // Clears the information field
+
+        // Extract and store only the updated 'information' (ignoring other fields like username, email, etc.)
+        if (updatedInformation.containsKey("information")) {
+            // Update the information field with the new data (assuming 'information' is a map)
+            Map<String, Object> info = (Map<String, Object>) updatedInformation.get("information");
+            user.setInformation(info); // Store only the information part
+        }
+
+        // Save the updated user object
         userRepository.save(user);
 
         return "User information updated successfully!";
     }
+
+
+
 
     // Method to add a new leave request
     @PostMapping("/addLeave/{username}")
@@ -149,7 +153,14 @@ public class UserController {
         return userRepository.findAll();
     }
 
+    @GetMapping("/getUser/{username}")
+    public User getUserInformation(@PathVariable("username") String username) {
+        // Find the user by username
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Error: User not found!"));
 
+        return user;
+    }
     // Helper method to get the username of the currently authenticated user
     private String getAuthenticatedUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:8080/api/test/';
-
+const API_URL = 'http://localhost:8080/api/user/';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   constructor(private http: HttpClient) { }
-
+  
   // Function to get the bearer token from localStorage
   private getAuthToken(): string | null {
     const user = sessionStorage.getItem('auth-user');
@@ -59,5 +61,34 @@ export class UserService {
       responseType: 'text',
     });
   }
-  
+  updateInfo(
+    username: string, 
+    email: string, 
+    role: string, 
+    information: { 
+      EmployeeId: string; 
+      Name: string; 
+      Phone: string; 
+      JobTitle: string; 
+      DepartmentName: string; 
+      DateOfJoining: string; 
+    }
+  ): Observable<any> {
+    return this.http.put(
+      `${API_URL}updateInfo/${username}`,
+      { email, role, information }, {
+        headers: this.createHeaders(),
+        responseType: 'text'  // Specify 'text' responseType since the response is a string
+
+      }
+    );
+  }
+   // New method to get employee details by username
+   getEmployeeDetails(username: string): Observable<any> {
+    return this.http.get(
+      `${API_URL}getUser/${username}`,{
+        headers: this.createHeaders(),
+      }
+    );
+  }
 }

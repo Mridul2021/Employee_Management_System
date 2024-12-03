@@ -9,19 +9,28 @@ public class Department {
 
     @Id
     private String id;  // MongoDB automatically generates this
-
+    private String departmentId;  // New DepartmentId field
     private String name;
     private String description;
     private LocalDateTime createdDate;
 
     // Constructors
-    public Department(String name, String description, LocalDateTime createdDate) {
+    public Department(String departmentId, String name, String description, LocalDateTime createdDate) {
+        this.departmentId = departmentId;
         this.name = name;
         this.description = description;
         this.createdDate = createdDate;
     }
 
     // Getters and setters
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
+    }
+
     public String getName() {
         return name;
     }

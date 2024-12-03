@@ -5,116 +5,184 @@
       src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
       class="w-24 h-24 mx-auto mb-4 rounded-full"
     />
-    @if (!isSuccessful) {
     <form
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
       novalidate
     >
+      <!-- Row 1: Username and Email -->
+      <div class="mb-4 flex gap-4">
+        <div class="flex-1">
+          <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+          <input
+            type="text"
+            name="username"
+            [(ngModel)]="form.username"
+            required
+            minlength="3"
+            maxlength="20"
+            #username="ngModel"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+        
+      </div>
+
+      <!-- Row 2: Password and Role -->
+      <div class="mb-4 flex gap-4">
+        <div class="flex-1">
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+        <div class="flex-1">
+          <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+          <select
+            name="role"
+            [(ngModel)]="form.role"
+            required
+            #role="ngModel"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 3: Employee ID and Active -->
+      <div class="mb-4 flex gap-4">
+        <div class="flex-1">
+          <label for="EmployeeId" class="block text-sm font-medium text-gray-700">Employee ID</label>
+          <input
+            type="text"
+            name="EmployeeId"
+            [(ngModel)]="form.information.EmployeeId"
+            required
+            #EmployeeId="ngModel"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+        <div class="flex-1">
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="form.email"
+            required
+            #email="ngModel"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+      </div>
+
+      <!-- Row 4: Name and Phone -->
+      <div class="mb-4 flex gap-4">
+        <div class="flex-1">
+          <label for="Name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input
+            type="text"
+            name="Name"
+            [(ngModel)]="form.information.Name"
+            required
+            #Name="ngModel"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+        <div class="flex-1">
+          <label for="Phone" class="block text-sm font-medium text-gray-700">Phone</label>
+          <input
+            type="text"
+            name="Phone"
+            [(ngModel)]="form.information.Phone"
+            required
+            #Phone="ngModel"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+      </div>
+
+      <!-- Row 5: Job Title and Department -->
+      <div class="mb-4 flex gap-4">
+        <div class="flex-1">
+          <label for="JobTitle" class="block text-sm font-medium text-gray-700">Job Title</label>
+          <input
+            type="text"
+            name="JobTitle"
+            [(ngModel)]="form.information.JobTitle"
+            required
+            #JobTitle="ngModel"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+        <div class="flex-1">
+          <label for="DepartmentName" class="block text-sm font-medium text-gray-700">Department</label>
+          <input
+            type="text"
+            name="DepartmentName"
+            [(ngModel)]="form.information.DepartmentName"
+            required
+            #DepartmentName="ngModel"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+      </div>
+
+      <!-- Row 6: Date of Joining -->
       <div class="mb-4">
-        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+        <label for="DateOfJoining" class="block text-sm font-medium text-gray-700">Date of Joining</label>
         <input
-          type="text"
-          class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          name="username"
-          [(ngModel)]="form.username"
+          type="date"
+          name="DateOfJoining"
+          [(ngModel)]="form.information.DateOfJoining"
           required
-          minlength="3"
-          maxlength="20"
-          #username="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+          #DateOfJoining="ngModel"
+          class="mt-1 p-2 w-full border border-gray-300 rounded-md"
         />
-        @if (username.errors && f.submitted) {
-        <div class="text-red-600 text-sm mt-1">
-          @if (username.errors['required']) {
-          <div>Username is required</div>
-          }
-          @if (username.errors['minlength']) {
-          <div>Username must be at least 3 characters</div>
-          }
-          @if (username.errors['maxlength']) {
-          <div>Username must be at most 20 characters</div>
-          }
-        </div>
-        }
       </div>
-      <div class="mb-4">
-        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-        <input
-          type="email"
-          class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          name="email"
-          [(ngModel)]="form.email"
-          required
-          email
-          #email="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
-        />
-        @if (email.errors && f.submitted) {
-        <div class="text-red-600 text-sm mt-1">
-          @if (email.errors['required']) {
-          <div>Email is required</div>
-          }
-          @if (email.errors['email']) {
-          <div>Email must be a valid email address</div>
-          }
-        </div>
-        }
-      </div>
-      <div class="mb-4">
-        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-        <input
-          type="password"
-          class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-        />
-        @if (password.errors && f.submitted) {
-        <div class="text-red-600 text-sm mt-1">
-          @if (password.errors['required']) {
-          <div>Password is required</div>
-          }
-          @if (password.errors['minlength']) {
-          <div>Password must be at least 6 characters</div>
-          }
-        </div>
-        }
-      </div>
-      <div class="mb-4">
-        <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
-        <select
-          class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          name="role"
-          [(ngModel)]="form.role"
-          required
-          #role="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && role.errors }"
-        >
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
-        <div *ngIf="role.errors && f.submitted" class="text-red-600 text-sm mt-1">
-          <div *ngIf="role.errors['required']">Role is required</div>
-        </div>
-      </div>
-      
+
+      <!-- Submit Button -->
       <div class="mb-4">
         <button class="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600">Sign Up</button>
       </div>
-
-      @if (f.submitted && isSignUpFailed) {
-      <div class="text-yellow-600 text-sm">
-        Signup failed!<br />{{ errorMessage }}
-      </div>
-      }
     </form>
-    } @else {
-    <div class="text-green-600 text-sm">Registration successful!</div>
-    }
+  </div>
+  <!-- Dialog Box -->
+<div
+  *ngIf="showDialog"
+  class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50"
+>
+  <div class="bg-white w-96 p-6 rounded-md shadow-lg text-center">
+    <h2 class="text-lg font-medium text-gray-700">User registered successfully!</h2>
+    <button
+      (click)="onDialogClose()"
+      class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+    >
+      OK
+    </button>
+  </div>
+  
+</div>
+<!-- dialog bo -->
+<div
+  *ngIf="showDialog"
+  class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50"
+>
+  <div class="bg-white w-96 p-6 rounded-md shadow-lg text-center">
+    <h2 class="text-lg font-medium text-gray-700">{{ dialogMessage }}</h2>
+    <button
+      (click)="onDialogClose()"
+      class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+    >
+      OK
+    </button>
   </div>
 </div>
