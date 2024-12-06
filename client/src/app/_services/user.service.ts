@@ -91,4 +91,10 @@ export class UserService {
       }
     );
   }
+  getUserByUsername(username: string): Observable<any> {
+    return this.http.get<any>(`${API_URL}getUser/${username}`, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    });
+  }
+  
 }

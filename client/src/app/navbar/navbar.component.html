@@ -4,11 +4,11 @@
   </div>
 
   <ul *ngIf="isLoggedIn" class="md:flex font-semibold hidden">
-    <li class="px-[10px] cursor-pointer hover:text-green-800">Home▾</li>
-    <li class="px-[10px] cursor-pointer hover:text-green-800">Pages▾</li>
-    <li class="px-[10px] cursor-pointer hover:text-green-800">Insurances▾</li>
-    <li class="px-[10px] cursor-pointer hover:text-green-800">Blog▾</li>
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="empdetails">Employee List</a> </li>
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="leave-admin">Leave-admin</a> </li>
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="leave-display">Leave-display</a> </li>
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="leave-request">Leave-request</a> </li>
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="leave-request">Your reviews</a> </li>
   </ul>
 
   <a *ngIf="!isLoggedIn" href="/login" class="hidden md:block bg-green-800 p-2 px-3 text-white border rounded-xl">Login</a>

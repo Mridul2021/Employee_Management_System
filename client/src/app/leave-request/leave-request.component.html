@@ -1,0 +1,30 @@
+<form (ngSubmit)="submitLeaveRequest()" #leaveForm="ngForm" class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-md">
+    <div class="mb-4">
+      <label for="leaveType" class="block text-gray-700 font-semibold">Leave Type:</label>
+      <select id="leaveType" name="leaveType" [(ngModel)]="leaveRequest.leaveType" class="mt-2 p-2 w-full border border-gray-300 rounded-md" required>
+        <option value="Sick Leave">Sick Leave</option>
+        <option value="Casual Leave">Casual Leave</option>
+        <option value="Annual Leave">Annual Leave</option>
+      </select>
+    </div>
+  
+    <div class="mb-4">
+      <label for="startDate" class="block text-gray-700 font-semibold">Start Date:</label>
+      <input type="date" id="startDate" name="startDate" [(ngModel)]="leaveRequest.startDate" class="mt-2 p-2 w-full border border-gray-300 rounded-md" required />
+    </div>
+  
+    <div class="mb-4">
+      <label for="endDate" class="block text-gray-700 font-semibold">End Date:</label>
+      <input type="date" id="endDate" name="endDate" [(ngModel)]="leaveRequest.endDate" class="mt-2 p-2 w-full border border-gray-300 rounded-md" required />
+    </div>
+  
+    <div class="mb-4">
+      <label for="reason" class="block text-gray-700 font-semibold">Reason:</label>
+      <textarea id="reason" name="reason" [(ngModel)]="leaveRequest.reason" class="mt-2 p-2 w-full border border-gray-300 rounded-md" required></textarea>
+    </div>
+  
+    <button type="submit" [disabled]="!leaveForm.valid" class="w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-300">
+      Submit Leave Request
+    </button>
+  </form>
+  

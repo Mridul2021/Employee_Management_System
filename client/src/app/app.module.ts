@@ -18,6 +18,11 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { DepartmentComponent } from './department/department.component';
 import { CreateDepartmentComponent } from './create-department/create-department.component';
+import { LeaveComponent } from './leave/leave.component';
+import { LeaveRequestComponent } from './leave-request/leave-request.component';
+import { LeaveDisplayComponent } from './leave-display/leave-display.component';
+import { PerformancePostComponent } from './performance-post/performance-post.component';
+import { ViewPerformanceComponent } from './view-performance/view-performance.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +36,12 @@ import { CreateDepartmentComponent } from './create-department/create-department
     EmployeeListComponent,
     EditEmployeeComponent,
     DepartmentComponent,
-    CreateDepartmentComponent
+    CreateDepartmentComponent,
+    LeaveComponent,
+    LeaveRequestComponent,
+    LeaveDisplayComponent,
+    PerformancePostComponent,
+    ViewPerformanceComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,27 @@
+<!-- view-performance.component.html -->
+<div class="p-6 max-w-7xl mx-auto bg-white rounded-lg shadow-lg">
+    <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">
+      Performance Reviews for {{ username }}
+    </h2>
+    <div *ngIf="performanceReviews.length > 0; else noReviews">
+      <table class="min-w-full bg-white border border-gray-300">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="py-3 px-6 text-left text-gray-700">Remark</th>
+            <th class="py-3 px-6 text-left text-gray-700">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let review of performanceReviews" class="border-b">
+            <td class="py-3 px-6">{{ review.remark }}</td>
+            <td class="py-3 px-6">{{ review.date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <ng-template #noReviews>
+      <p class="text-center text-gray-500">No performance reviews found.</p>
+    </ng-template>
+  </div>
+  

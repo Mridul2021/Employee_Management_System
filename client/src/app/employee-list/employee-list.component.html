@@ -18,6 +18,8 @@
           <th class="px-4 py-2 border border-gray-300 text-left">Details</th>
           <th class="px-4 py-2 border border-gray-300 text-left">Edit</th>
           <th class="px-4 py-2 border border-gray-300 text-left">Delete</th>
+          <th class="px-4 py-2 border border-gray-300 text-left"></th>
+          <th class="px-4 py-2 border border-gray-300 text-left"></th>
         </tr>
       </thead>
       <tbody>
@@ -42,7 +44,7 @@
           <td class="px-4 py-2 border border-gray-300">
             <button
               (click)="editEmployee(employee.username)"
-              class="text-yellow-500 hover:text-yellow-700"
+              class="text-green-500 hover:text-yellow-700"
             >
               Edit
             </button>
@@ -53,6 +55,22 @@
               class="text-red-500 hover:text-red-700"
             >
               Delete
+            </button>
+            
+          </td>
+          <td class="px-4 py-2 border border-gray-300">
+            <button
+              (click)="giveReview(employee.username)"
+              class="text-yellow-500 hover:text-yellow-700"
+            >
+              Give Review
+            </button>
+          </td><td class="px-4 py-2 border border-gray-300">
+            <button
+              (click)="reviewHostory(employee.username)"
+              class="text-orange-500 hover:text-yellow-700"
+            >
+              Review history
             </button>
           </td>
         </tr>

@@ -76,4 +76,10 @@ export class EmployeeListComponent implements OnInit {
   editEmployee(username: string): void {
     this.router.navigate(['/edit', username]);
   }
+  reviewHostory(username: string): void {
+    this.router.navigate(['/view-performance', username]);
+  }
+  giveReview(username: string): void {
+    this.router.navigate(['/editperformance', username]);
+  }
 }
