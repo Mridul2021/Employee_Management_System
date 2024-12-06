@@ -15,6 +15,7 @@ export class StorageService {
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+
   }
 
   public getUser(): any {
@@ -25,6 +26,17 @@ export class StorageService {
 
     return null;
   }
+  public getRole(): any {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    if (user) {
+      const parsedUser = JSON.parse(user); // Parse the user JSON string
+      console.log("Role is: " + parsedUser.role); // Access the role property
+      return parsedUser.role; // Return the role
+    }
+  
+    return null;
+  }
+  
 
   public isLoggedIn(): boolean {
     const user = window.sessionStorage.getItem(USER_KEY);

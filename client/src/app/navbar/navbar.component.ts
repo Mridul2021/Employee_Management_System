@@ -15,7 +15,9 @@ import { EventBusService } from '../_shared/event-bus.service';
 export class NavbarComponent {
   drawerOpen = false; // State variable to control drawer visibility
   isLoggedIn = false;
-  user: any; // Declare the user property
+  isAdmin=false;
+  user: any;
+  role: any;
 
   constructor(
     private storageService: StorageService,
@@ -34,7 +36,12 @@ export class NavbarComponent {
 
     if (this.isLoggedIn) {
       this.user = this.storageService.getUser();
-      console.log(this.user);
+      this.role = this.storageService.getRole();
+      if(this.role=="admin")
+      {
+        this.isAdmin=true;
+        console.log("wcwe");
+      }
     }
 
     this.eventBusSub = this.eventBusService.on('logout', () => {

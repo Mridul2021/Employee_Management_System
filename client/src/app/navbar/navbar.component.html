@@ -3,10 +3,18 @@
     <div class="text-4xl text-orange-600 font-bold">Chubb</div>
   </div>
 
-  <ul *ngIf="isLoggedIn" class="md:flex font-semibold hidden">
+  <ul *ngIf="isLoggedIn&&isAdmin" class="md:flex font-semibold hidden">
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="empdetails">Employee List</a> </li>
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="leave-admin">Leave-admin</a> </li>
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="leave-display">Leave-display</a> </li>
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="leave-request">Leave-request</a> </li>
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="view-performance/{{user?.username}}">Your reviews</a> </li>
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="notifications/{{user?.username}}">Notifications</a> </li>
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="department">Departments</a> </li>
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="create-department">Create Departments</a> </li>
+  </ul>
+  <ul *ngIf="isLoggedIn&&!isAdmin" class="md:flex font-semibold hidden">
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="leave-display">Leave-status</a> </li>
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="leave-request">Leave-request</a> </li>
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="view-performance/{{user?.username}}">Your reviews</a> </li>
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="notifications/{{user?.username}}">Notifications</a> </li>

@@ -43,7 +43,6 @@ public class AuthController {
 	@Autowired
 	PasswordEncoder encoder;
 
-	// Sign-in Method
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody SigninRequest signinRequest) {
 		Authentication authentication = authenticationManager.authenticate(
@@ -56,13 +55,13 @@ public class AuthController {
 		User user = userRepository.findByUsername(userDetails.getUsername())
 				.orElseThrow(() -> new RuntimeException("Error: User not found."));
 
-		Set<String> roles = userDetails.getAuthorities()
-				.stream()
-				.map(item -> item.getAuthority())
-				.collect(Collectors.toSet());
+		// Get role as a single string
+		String role = user.getRole(); // Assuming `getRole()` returns a single string.
 
-		return ResponseEntity.ok(new JwtResponse(jwt, user.getId(), user.getUsername(), user.getEmail(), roles));
+		return ResponseEntity.ok(new JwtResponse(jwt, user.getId(), user.getUsername(), user.getEmail(), role));
 	}
+
+
 
 	// Sign-up Method
 	@PostMapping("/signup")
