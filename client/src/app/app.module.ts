@@ -23,6 +23,8 @@ import { LeaveRequestComponent } from './leave-request/leave-request.component';
 import { LeaveDisplayComponent } from './leave-display/leave-display.component';
 import { PerformancePostComponent } from './performance-post/performance-post.component';
 import { ViewPerformanceComponent } from './view-performance/view-performance.component';
+import { NotificationPostComponent } from './notification-post/notification-post.component';
+import { ViewNotificationComponent } from './view-notification/view-notification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +43,9 @@ import { ViewPerformanceComponent } from './view-performance/view-performance.co
     LeaveRequestComponent,
     LeaveDisplayComponent,
     PerformancePostComponent,
-    ViewPerformanceComponent
+    ViewPerformanceComponent,
+    NotificationPostComponent,
+    ViewNotificationComponent
   ],
   imports: [
     BrowserModule,

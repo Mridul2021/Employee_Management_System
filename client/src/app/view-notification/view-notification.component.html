@@ -1,0 +1,24 @@
+<div class="p-6 max-w-7xl mx-auto bg-white rounded-lg shadow-lg">
+    <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">
+      Notifications
+    </h2>
+    <div *ngIf="notifications.length > 0; else noNotifications">
+      <table class="min-w-full bg-white border border-gray-300">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="py-3 px-6 text-left text-gray-700">Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let notification of notifications" class="border-b">
+            <td class="py-3 px-6">{{ notification.message }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <ng-template #noNotifications>
+      <p class="text-center text-gray-500">No notifications found.</p>
+    </ng-template>
+  </div>
+  

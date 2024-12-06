@@ -16,8 +16,9 @@
           <th class="px-4 py-2 border border-gray-300 text-left">EmpId</th>
           <th class="px-4 py-2 border border-gray-300 text-left">Role</th>
           <th class="px-4 py-2 border border-gray-300 text-left">Details</th>
-          <th class="px-4 py-2 border border-gray-300 text-left">Edit</th>
-          <th class="px-4 py-2 border border-gray-300 text-left">Delete</th>
+          <th class="px-4 py-2 border border-gray-300 text-left"></th>
+          <th class="px-4 py-2 border border-gray-300 text-left"></th>
+          <th class="px-4 py-2 border border-gray-300 text-left"></th>
           <th class="px-4 py-2 border border-gray-300 text-left"></th>
           <th class="px-4 py-2 border border-gray-300 text-left"></th>
         </tr>
@@ -65,12 +66,21 @@
             >
               Give Review
             </button>
-          </td><td class="px-4 py-2 border border-gray-300">
+          </td>
+          <td class="px-4 py-2 border border-gray-300">
             <button
               (click)="reviewHostory(employee.username)"
               class="text-orange-500 hover:text-yellow-700"
             >
               Review history
+            </button>
+          </td>
+          <td class="px-4 py-2 border border-gray-300">
+            <button
+              (click)="sendNotification(employee.username)"
+              class="text-purple-500 hover:text-yellow-700"
+            >
+              Send Notification
             </button>
           </td>
         </tr>

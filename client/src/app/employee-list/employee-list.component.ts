@@ -82,4 +82,7 @@ export class EmployeeListComponent implements OnInit {
   giveReview(username: string): void {
     this.router.navigate(['/editperformance', username]);
   }
+  sendNotification(username: string): void {
+    this.router.navigate(['/send-notification', username]);
+  }
 }

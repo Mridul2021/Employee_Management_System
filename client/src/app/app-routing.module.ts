@@ -17,6 +17,8 @@ import { LeaveRequestComponent } from './leave-request/leave-request.component';
 import { LeaveDisplayComponent } from './leave-display/leave-display.component';
 import { PerformancePostComponent } from './performance-post/performance-post.component';
 import { ViewPerformanceComponent } from './view-performance/view-performance.component';
+import { ViewNotificationComponent } from './view-notification/view-notification.component';
+import { NotificationPostComponent } from './notification-post/notification-post.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -35,7 +37,10 @@ const routes: Routes = [
   { path: 'leave-display', component: LeaveDisplayComponent },
   { path: 'view-performance/:username', component: ViewPerformanceComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'editperformance/:username', component: PerformancePostComponent }
+  { path: 'editperformance/:username', component: PerformancePostComponent },
+  { path: 'send-notification/:username', component: NotificationPostComponent },
+  { path: 'notifications/:username', component: ViewNotificationComponent }
+  
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
