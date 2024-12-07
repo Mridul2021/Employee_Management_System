@@ -1,6 +1,9 @@
 {
   "name": "angular-17-jwt-auth",
   "version": "0.0.0",
+  "engines":{
+    "node":">=18 <23"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
