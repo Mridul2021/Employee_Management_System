@@ -94,13 +94,15 @@ public class AuthController {
 
 		String subject = "Welcome to Our Service";
 		String message = "Hello " + user.getUsername() + ",\n\n" +
+				"WELCOME ONBOARD!\n" +
 				"Your account has been successfully created.\n" +
 				"Your username: " + user.getUsername() + "\n" +
 				"Your password: " + signUpRequest.getPassword() + "\n\n" +
+				"You can change your password after login\n" +
 				"Best regards,\n" +
 				"The Team";
 
-		emailService.sendEmail(user.getEmail(), subject, message);  // Send email
+		emailService.sendEmail(user.getEmail(), subject, message);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
