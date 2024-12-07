@@ -39,6 +39,7 @@ public class PerformanceController {
 
     @PutMapping("/{userName}")
     public ResponseEntity<Performance> updatePerformance(@PathVariable String userName, @RequestBody Performance updatedPerformance) {
+
         List<Performance> performances = performanceRepository.findByUserName(userName);
         if (!performances.isEmpty()) {
             Performance performance = performances.get(0);
