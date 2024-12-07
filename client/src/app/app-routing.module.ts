@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'leave-request', component: LeaveRequestComponent },
   { path: 'leave-display', component: LeaveDisplayComponent },
   { path: 'view-performance/:username', component: ViewPerformanceComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'editperformance/:username', component: PerformancePostComponent },
   { path: 'send-notification/:username', component: NotificationPostComponent },
   { path: 'notifications/:username', component: ViewNotificationComponent },
