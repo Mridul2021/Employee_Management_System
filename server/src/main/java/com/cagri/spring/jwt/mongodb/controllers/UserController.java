@@ -1,14 +1,17 @@
 package com.cagri.spring.jwt.mongodb.controllers;
 import java.util.HashMap;
 import com.cagri.spring.jwt.mongodb.models.User;
+import com.cagri.spring.jwt.mongodb.payload.response.MessageResponse;
 import com.cagri.spring.jwt.mongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @RestController
@@ -17,7 +20,8 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    PasswordEncoder encoder;
     @GetMapping("/updateLoginTime/{username}")
     public String updateLoginTime(@PathVariable("username") String username, @RequestBody String loginTime) {
         String currentUsername = getAuthenticatedUsername();
@@ -109,6 +113,21 @@ public class UserController {
                 .orElseThrow(() -> new RuntimeException("Error: User not found!"));
 
         return user;
+    }
+    @PutMapping("/changePassword")
+    public ResponseEntity<?> changePassword(@RequestBody Map<String, String> passwords) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Error: User not found."));
+
+        if (!encoder.matches(passwords.get("currentPassword"), user.getPassword())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Current password is incorrect."));
+        }
+
+        user.setPassword(encoder.encode(passwords.get("newPassword")));
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new MessageResponse("Password changed successfully!"));
     }
     private String getAuthenticatedUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

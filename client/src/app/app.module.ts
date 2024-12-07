@@ -25,6 +25,7 @@ import { PerformancePostComponent } from './performance-post/performance-post.co
 import { ViewPerformanceComponent } from './view-performance/view-performance.component';
 import { NotificationPostComponent } from './notification-post/notification-post.component';
 import { ViewNotificationComponent } from './view-notification/view-notification.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { ViewNotificationComponent } from './view-notification/view-notification
     PerformancePostComponent,
     ViewPerformanceComponent,
     NotificationPostComponent,
-    ViewNotificationComponent
+    ViewNotificationComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

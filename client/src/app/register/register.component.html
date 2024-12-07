@@ -118,16 +118,22 @@
             class="mt-1 p-2 w-full border border-gray-300 rounded-md"
           />
         </div>
-        <div class="flex-1">
-          <label for="DepartmentName" class="block text-sm font-medium text-gray-700">Department</label>
-          <input
-            type="text"
-            name="DepartmentName"
-            [(ngModel)]="form.information.DepartmentName"
-            required
-            #DepartmentName="ngModel"
-            class="mt-1 p-2 w-full border border-gray-300 rounded-md"
-          />
+        <div class="mb-4 flex gap-4">
+          <div class="flex-1">
+            <label for="DepartmentName" class="block text-sm font-medium text-gray-700">Department</label>
+            <select
+              name="DepartmentName"
+              [(ngModel)]="form.information.DepartmentName"
+              required
+              #DepartmentName="ngModel"
+              class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            >
+              <option value="" disabled selected>Select a department</option>
+              <option *ngFor="let department of departments" [value]="department.name">
+                {{ department.name }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -164,10 +170,7 @@
   
 </div>
 <!-- dialog bo -->
-<div
-  *ngIf="showDialog"
-  class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50"
->
+<div *ngIf="showDialog" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
   <div class="bg-white w-96 p-6 rounded-md shadow-lg text-center">
     <h2 class="text-lg font-medium text-gray-700">{{ dialogMessage }}</h2>
     <button

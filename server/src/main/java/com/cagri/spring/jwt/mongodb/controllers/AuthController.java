@@ -104,21 +104,6 @@ public class AuthController {
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
-	@PutMapping("/changePassword")
-	public ResponseEntity<?> changePassword(@RequestBody Map<String, String> passwords) {
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		User user = userRepository.findByUsername(username)
-				.orElseThrow(() -> new RuntimeException("Error: User not found."));
-
-		if (!encoder.matches(passwords.get("currentPassword"), user.getPassword())) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Error: Current password is incorrect."));
-		}
-
-		user.setPassword(encoder.encode(passwords.get("newPassword")));
-		userRepository.save(user);
-
-		return ResponseEntity.ok(new MessageResponse("Password changed successfully!"));
-	}
 	@PostMapping("/signout")
 	public ResponseEntity<?> logoutUser() {
 		SecurityContextHolder.clearContext();

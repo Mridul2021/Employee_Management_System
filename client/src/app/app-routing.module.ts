@@ -19,6 +19,7 @@ import { PerformancePostComponent } from './performance-post/performance-post.co
 import { ViewPerformanceComponent } from './view-performance/view-performance.component';
 import { ViewNotificationComponent } from './view-notification/view-notification.component';
 import { NotificationPostComponent } from './notification-post/notification-post.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -39,7 +40,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'editperformance/:username', component: PerformancePostComponent },
   { path: 'send-notification/:username', component: NotificationPostComponent },
-  { path: 'notifications/:username', component: ViewNotificationComponent }
+  { path: 'notifications/:username', component: ViewNotificationComponent },
+  { path: 'change-password', component: ChangePasswordComponent }
   
 ];
 @NgModule({

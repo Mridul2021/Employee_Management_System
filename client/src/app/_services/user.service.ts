@@ -91,5 +91,29 @@ export class UserService {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
     });
   }
+  changePassword(currentPassword: string, newPassword: string, confirmPassword: string): Observable<any> {
+    const username = JSON.parse(sessionStorage.getItem('auth-user') || '{}').username;
   
+    if (!username) {
+      return new Observable((observer) => observer.error('User not logged in'));
+    }
+  
+    // Check if newPassword and confirmPassword match
+    if (newPassword !== confirmPassword) {
+      return new Observable((observer) => observer.error('Error: New password and confirm password do not match.'));
+    }
+  
+    return this.http.put(
+      API_URL_USER + 'changePassword',
+      {
+        currentPassword,
+        newPassword,
+        confirmPassword,  // Added confirmPassword to the request payload
+      },
+      {
+        headers: this.createHeaders(),
+        responseType: 'text'
+      }
+    );
+  }
 }

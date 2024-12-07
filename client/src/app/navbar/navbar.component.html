@@ -1,4 +1,4 @@
-<nav class="w-full bg-white flex justify-between px-4 md:px-8 items-center py-3">
+<nav class="w-full bg-white flex justify-between px-4 md:px-8 items-center py-3 shadow-lg">
   <div>
     <div class="text-4xl text-orange-600 font-bold">Chubb</div>
   </div>
@@ -12,12 +12,15 @@
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="notifications/{{user?.username}}">Notifications</a> </li>
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="department">Departments</a> </li>
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="create-department">Create Departments</a> </li>
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="change-password">Change Password</a> </li>
   </ul>
   <ul *ngIf="isLoggedIn&&!isAdmin" class="md:flex font-semibold hidden">
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="leave-display">Leave-status</a> </li>
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="leave-request">Leave-request</a> </li>
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="view-performance/{{user?.username}}">Your reviews</a> </li>
     <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="notifications/{{user?.username}}">Notifications</a> </li>
+    <li ><a class="px-[10px] cursor-pointer hover:text-green-800" href="change-password">Change Password</a> </li>
+
   </ul>
 
   <a *ngIf="!isLoggedIn" href="/login" class="hidden md:block bg-green-800 p-2 px-3 text-white border rounded-xl">Login</a>
@@ -48,11 +51,25 @@
       </svg>
     </button>
     <h2 class="text-2xl font-semibold text-green-600 mb-4">Menu</h2>
-    <a href="#" class="block text-gray-600 hover:text-green-600 mb-2">Home</a>
-    <a href="#" class="block text-gray-600 hover:text-green-600 mb-2">Pages</a>
-    <a href="#" class="block text-gray-600 hover:text-green-600 mb-2">Insurances</a>
-    <a href="#" class="block text-gray-600 hover:text-green-600 mb-2">Blog</a>
-    <a href="#" class="block text-gray-600 hover:text-green-600 mb-2">Contact Us</a>
+
+    <div *ngIf="isLoggedIn&&isAdmin">
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="empdetails">Employee List</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="leave-admin">Leave-admin</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="leave-display">Leave-display</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="leave-request">Leave-request</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="view-performance/{{user?.username}}">Your reviews</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="notifications/{{user?.username}}">Notifications</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="department">Departments</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="create-department">Create Departments</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="change-password">Change Password</a>
+  </div>
+    <div *ngIf="isLoggedIn&&!isAdmin">
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="leave-request">Leave-request</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="notifications/{{user?.username}}">Notifications</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="department">Departments</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="create-department">Create Departments</a>
+      <a class="block text-gray-600 hover:text-green-600 mb-2" href="change-password">Change Password</a>
+  </div>
     <a *ngIf="!isLoggedIn" href="/login" class="bg-green-800 p-2 px-3 text-white border rounded-xl">Login</a>
     <button *ngIf="isLoggedIn" (click)="logout()" class="bg-green-800 p-2 px-3 text-white border rounded-xl">Logout</button>
   </div>

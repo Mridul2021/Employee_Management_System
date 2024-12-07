@@ -40,7 +40,6 @@ export class NavbarComponent {
       if(this.role=="admin")
       {
         this.isAdmin=true;
-        console.log("wcwe");
       }
     }
 
