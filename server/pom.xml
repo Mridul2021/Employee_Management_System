@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bezkoder</groupId>
-	<artifactId>spring-boot-security-jwt-mongodb</artifactId>
+	<artifactId>spring-boot-EMS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-security-jwt-mongodb</name>
+	<name>spring-boot-EMS</name>
 	<description>Demo project for Spring Boot Auth with Spring Security,
 		JWT, MongoDB</description>
 
