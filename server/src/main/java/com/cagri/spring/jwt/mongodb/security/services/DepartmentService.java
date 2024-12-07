@@ -13,7 +13,6 @@ public class DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-    // Create department
     public Department createDepartment(Department department) {
         // Check if department with the same name already exists
         Optional<Department> existingDepartment = departmentRepository.findByName(department.getName());
@@ -23,17 +22,14 @@ public class DepartmentService {
         return departmentRepository.save(department);
     }
 
-    // Get all departments
     public List<Department> getAllDepartments() {
         return departmentRepository.findAll();
     }
 
-    // Get department by ID
     public Optional<Department> getDepartmentById(String id) {
         return departmentRepository.findById(id);
     }
 
-    // Update department
     public Department updateDepartment(String id, Department departmentDetails) {
         Department department = departmentRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Department not found with id: " + id));
         department.setName(departmentDetails.getName());
@@ -42,7 +38,6 @@ public class DepartmentService {
         return departmentRepository.save(department);
     }
 
-    // Delete department
     public void deleteDepartment(String id) {
         departmentRepository.deleteById(id);
     }

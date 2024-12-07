@@ -15,21 +15,18 @@ public class PerformanceController {
     @Autowired
     private PerformanceRepository performanceRepository;
 
-    // Create a performance entry
     @PostMapping
     public ResponseEntity<Performance> createPerformance(@RequestBody Performance performance) {
         Performance createdPerformance = performanceRepository.save(performance);
         return ResponseEntity.ok(createdPerformance);
     }
 
-    // Get all performance entries
     @GetMapping
     public ResponseEntity<List<Performance>> getAllPerformances() {
         List<Performance> performances = performanceRepository.findAll();
         return ResponseEntity.ok(performances);
     }
 
-    // Get a performance entry by username
     @GetMapping("/{userName}")
     public ResponseEntity<List<Performance>> getPerformanceByUserName(@PathVariable String userName) {
         List<Performance> performances = performanceRepository.findByUserName(userName);
@@ -40,12 +37,10 @@ public class PerformanceController {
         }
     }
 
-    // Update a performance entry by username
     @PutMapping("/{userName}")
     public ResponseEntity<Performance> updatePerformance(@PathVariable String userName, @RequestBody Performance updatedPerformance) {
         List<Performance> performances = performanceRepository.findByUserName(userName);
         if (!performances.isEmpty()) {
-            // Assuming only one performance record per userName
             Performance performance = performances.get(0);
             performance.setRemark(updatedPerformance.getRemark());
             performanceRepository.save(performance);
@@ -66,6 +61,4 @@ public class PerformanceController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
 }

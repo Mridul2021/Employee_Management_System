@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface LeaveRepository extends MongoRepository<Leave, String> {
-    List<Leave> findByUserName(String userName); // Custom method to find leaves by userName
+    List<Leave> findByUserName(String userName);
 }

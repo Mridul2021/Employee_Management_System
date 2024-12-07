@@ -17,26 +17,23 @@ public class LeaveController {
     @Autowired
     private LeaveRepository leaveRepository;
 
-    // Create a leave entry
     @PostMapping
     public ResponseEntity<Leave> createLeave(@RequestBody Leave leave) {
-        leave.setStatus("Pending"); // Default status
-        leave.setApprovalDate(null); // Approval date starts as null
+        leave.setStatus("Pending");
+        leave.setApprovalDate(null);
         Leave createdLeave = leaveRepository.save(leave);
         return ResponseEntity.ok(createdLeave);
     }
 
-    // Get all leave entries
     @GetMapping
     public ResponseEntity<List<Leave>> getAllLeaves() {
         List<Leave> leaves = leaveRepository.findAll();
         return ResponseEntity.ok(leaves);
     }
 
-    // Get a leave entry by id
     @GetMapping("/{id}")
     public ResponseEntity<Leave> getLeaveById(@PathVariable String id) {
-        Optional<Leave> leave = leaveRepository.findById(id); // Using MongoDB's _id field
+        Optional<Leave> leave = leaveRepository.findById(id);
         if (leave.isPresent()) {
             return ResponseEntity.ok(leave.get());
         } else {
@@ -44,10 +41,9 @@ public class LeaveController {
         }
     }
 
-    // Get all leaves by username
     @GetMapping("/user/{userName}")
     public ResponseEntity<List<Leave>> getLeavesByUserName(@PathVariable String userName) {
-        List<Leave> leaves = leaveRepository.findByUserName(userName); // Using the custom method to find leaves by username
+        List<Leave> leaves = leaveRepository.findByUserName(userName);
         if (leaves.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
@@ -55,10 +51,9 @@ public class LeaveController {
         }
     }
 
-    // Update a leave entry by id
     @PutMapping("/{id}")
     public ResponseEntity<Leave> updateLeave(@PathVariable String id, @RequestBody Leave updatedLeave) {
-        Optional<Leave> leave = leaveRepository.findById(id); // Using MongoDB's _id field
+        Optional<Leave> leave = leaveRepository.findById(id);
         if (leave.isPresent()) {
             Leave existingLeave = leave.get();
             existingLeave.setLeaveType(updatedLeave.getLeaveType());
@@ -72,10 +67,9 @@ public class LeaveController {
         }
     }
 
-    // Delete a leave entry by id
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteLeave(@PathVariable String id) {
-        Optional<Leave> leave = leaveRepository.findById(id); // Using MongoDB's _id field
+        Optional<Leave> leave = leaveRepository.findById(id);
         if (leave.isPresent()) {
             leaveRepository.delete(leave.get());
             return ResponseEntity.noContent().build();
@@ -84,10 +78,9 @@ public class LeaveController {
         }
     }
 
-    // Change status and approval date of a leave entry by id
     @PatchMapping("/{id}/status")
     public ResponseEntity<Leave> updateLeaveStatus(@PathVariable String id, @RequestBody Leave statusUpdate) {
-        Optional<Leave> leave = leaveRepository.findById(id); // Using MongoDB's _id field
+        Optional<Leave> leave = leaveRepository.findById(id);
         if (leave.isPresent()) {
             Leave existingLeave = leave.get();
             existingLeave.setStatus(statusUpdate.getStatus());

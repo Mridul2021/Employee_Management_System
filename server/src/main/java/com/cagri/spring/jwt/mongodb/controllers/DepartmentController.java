@@ -25,7 +25,6 @@ public class DepartmentController {
     @Autowired
     private UserRepository userRepository;
 
-    // Create department entry
     @PostMapping
     public ResponseEntity<Department> createDepartment(@RequestBody Department department) {
         String currentUsername = getAuthenticatedUsername();
@@ -37,60 +36,55 @@ public class DepartmentController {
         return ResponseEntity.ok(createdDepartment);
     }
 
-    // Get all department entries
     @GetMapping
     public ResponseEntity<List<Department>> getAllDepartments() {
         String currentUsername = getAuthenticatedUsername();
         String currentUserRole = getRoleByUsername(currentUsername);
         if (!"admin".equalsIgnoreCase(currentUserRole)) {
-            return ResponseEntity.status(403).build(); // Forbidden if the user is not an admin
+            return ResponseEntity.status(403).build();
         }
         List<Department> departments = departmentService.getAllDepartments();
         return ResponseEntity.ok(departments);
     }
 
-    // Get department by ID
     @GetMapping("/{id}")
     public ResponseEntity<Department> getDepartmentById(@PathVariable String id) {
         String currentUsername = getAuthenticatedUsername();
         String currentUserRole = getRoleByUsername(currentUsername);
         if (!"admin".equalsIgnoreCase(currentUserRole)) {
-            return ResponseEntity.status(403).build(); // Forbidden if the user is not an admin
+            return ResponseEntity.status(403).build();
         }
         Optional<Department> department = departmentService.getDepartmentById(id);
         return department.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Update department entry
     @PutMapping("/{id}")
     public ResponseEntity<Department> updateDepartment(@PathVariable String id, @RequestBody Department departmentDetails) {
         String currentUsername = getAuthenticatedUsername();
         String currentUserRole = getRoleByUsername(currentUsername);
         if (!"admin".equalsIgnoreCase(currentUserRole)) {
-            return ResponseEntity.status(403).build(); // Forbidden if the user is not an admin
+            return ResponseEntity.status(403).build();
         }
         Department updatedDepartment = departmentService.updateDepartment(id, departmentDetails);
         return ResponseEntity.ok(updatedDepartment);
     }
 
-    // Delete department entry
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDepartment(@PathVariable String id) {
         String currentUsername = getAuthenticatedUsername();
         String currentUserRole = getRoleByUsername(currentUsername);
         if (!"admin".equalsIgnoreCase(currentUserRole)) {
-            return ResponseEntity.status(403).build(); // Forbidden if the user is not an admin
+            return ResponseEntity.status(403).build();
         }
 
         departmentService.deleteDepartment(id);
         return ResponseEntity.noContent().build();
     }
 
-    // Helper method to get the role of the currently authenticated user
     private String getAuthenticatedUserRole() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getAuthorities().stream()
-                .findFirst() // Assuming a single role per user
+                .findFirst()
                 .map(GrantedAuthority::getAuthority)
                 .orElse(null);
     }

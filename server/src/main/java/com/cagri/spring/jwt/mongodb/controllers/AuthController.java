@@ -55,15 +55,13 @@ public class AuthController {
 		User user = userRepository.findByUsername(userDetails.getUsername())
 				.orElseThrow(() -> new RuntimeException("Error: User not found."));
 
-		// Get role as a single string
-		String role = user.getRole(); // Assuming `getRole()` returns a single string.
+		String role = user.getRole();
 
 		return ResponseEntity.ok(new JwtResponse(jwt, user.getId(), user.getUsername(), user.getEmail(), role));
 	}
 
 
 
-	// Sign-up Method
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -94,7 +92,6 @@ public class AuthController {
 
 		userRepository.save(user);
 
-		// Send email to the user with username and password
 		String subject = "Welcome to Our Service";
 		String message = "Hello " + user.getUsername() + ",\n\n" +
 				"Your account has been successfully created.\n" +
@@ -107,20 +104,16 @@ public class AuthController {
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
-	// Change Password Method
 	@PutMapping("/changePassword")
 	public ResponseEntity<?> changePassword(@RequestBody Map<String, String> passwords) {
-		// Get the current logged-in user
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		User user = userRepository.findByUsername(username)
 				.orElseThrow(() -> new RuntimeException("Error: User not found."));
 
-		// Check if the current password matches
 		if (!encoder.matches(passwords.get("currentPassword"), user.getPassword())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Current password is incorrect."));
 		}
 
-		// Update the user's password
 		user.setPassword(encoder.encode(passwords.get("newPassword")));
 		userRepository.save(user);
 
@@ -128,11 +121,8 @@ public class AuthController {
 	}
 	@PostMapping("/signout")
 	public ResponseEntity<?> logoutUser() {
-		// Clear the authentication from SecurityContext
 		SecurityContextHolder.clearContext();
 
-		// Optionally, you can implement a token blacklist or invalidation mechanism if required
-		// For now, we just clear the authentication context
 
 		return ResponseEntity.ok(new MessageResponse("User logged out successfully!"));
 	}

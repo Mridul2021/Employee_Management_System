@@ -48,5 +48,4 @@ public class AttendanceController {
         List<Attendance> attendances = attendanceService.getAttendancesByUserName(userName);
         return attendances.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(attendances);
     }
-
 }
