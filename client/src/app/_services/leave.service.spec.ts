@@ -18,12 +18,12 @@ describe('LeaveService', () => {
   it('should fetch leaves data', () => {
     const mockLeaves = [
       {
-        _id: '1',
-        userName: 'Rakesh',
-        leaveType: 'Sick Leave',
-        startDate: '2024-12-10',
-        endDate: '2024-12-12',
-        reason: 'Fever and cold',
+        _id: '',
+        userName: '',
+        leaveType: '',
+        startDate: '',
+        endDate: '',
+        reason: '',
         status: 'Pending',
         approvalDate: null,
       },

@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-const API_URL = 'http://localhost:8080/api/department/';
+const API_URL_DEPARTMENT = environment.API_URL_DEPARTMENT;
 
 @Injectable({
   providedIn: 'root',
 })
 export class DepartmentService {
   constructor(private http: HttpClient) {}
-
-  // Helper function to fetch token from sessionStorage
   private getAuthToken(): string | null {
     const user = sessionStorage.getItem('auth-user');
     if (user) {
@@ -19,8 +18,6 @@ export class DepartmentService {
     }
     return null;
   }
-
-  // Function to create headers with the authorization token
   private createHeaders(): HttpHeaders {
     const token = this.getAuthToken();
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -30,35 +27,30 @@ export class DepartmentService {
     return headers;
   }
 
-  // Create a new department
   createDepartment(department: {
     name: string;
     description: string;
     createdDate: string;
   }): Observable<any> {
-    return this.http.post(API_URL, department, { headers: this.createHeaders() });
+    return this.http.post(API_URL_DEPARTMENT, department, { headers: this.createHeaders() });
   }
 
-  // Get all departments
   getAllDepartments(): Observable<any[]> {
-    return this.http.get<any[]>(API_URL, { headers: this.createHeaders() });
+    return this.http.get<any[]>(API_URL_DEPARTMENT, { headers: this.createHeaders() });
   }
 
-  // Get department by ID
   getDepartmentById(id: string): Observable<any> {
-    return this.http.get(`${API_URL}${id}`, { headers: this.createHeaders() });
+    return this.http.get(`${API_URL_DEPARTMENT}${id}`, { headers: this.createHeaders() });
   }
 
-  // Update an existing department
   updateDepartment(
     id: string,
     department: { name: string; description: string; createdDate: string }
   ): Observable<any> {
-    return this.http.put(`${API_URL}${id}`, department, { headers: this.createHeaders() });
+    return this.http.put(`${API_URL_DEPARTMENT}${id}`, department, { headers: this.createHeaders() });
   }
 
-  // Delete a department by ID
   deleteDepartment(id: string): Observable<void> {
-    return this.http.delete<void>(`${API_URL}${id}`, { headers: this.createHeaders() });
+    return this.http.delete<void>(`${API_URL_DEPARTMENT}${id}`, { headers: this.createHeaders() });
   }
 }

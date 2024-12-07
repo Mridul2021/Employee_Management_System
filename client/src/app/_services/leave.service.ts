@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-const API_URL = 'http://localhost:8080/api/leave/';
+const API_URL_LEAVE = environment.API_URL_LEAVE;
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,6 @@ const API_URL = 'http://localhost:8080/api/leave/';
 export class LeaveService {
   constructor(private http: HttpClient) {}
 
-  // Helper function to fetch token from sessionStorage
   private getAuthToken(): string | null {
     const user = sessionStorage.getItem('auth-user');
     if (user) {
@@ -20,7 +20,6 @@ export class LeaveService {
     return null;
   }
 
-  // Function to create headers with the authorization token
   private createHeaders(): HttpHeaders {
     const token = this.getAuthToken();
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -30,25 +29,23 @@ export class LeaveService {
     return headers;
   }
 
-  // Fetch all leaves
   getAllLeaves(): Observable<any[]> {
-    return this.http.get<any[]>(API_URL, { headers: this.createHeaders() });
+    return this.http.get<any[]>(API_URL_LEAVE, { headers: this.createHeaders() });
   }
 
-  // Update leave status and approval date
   updateLeaveStatus(id: string, status: string, approvalDate: string): Observable<any> {
     const updateData = { status, approvalDate };
-    return this.http.patch(`${API_URL}${id}/status`, updateData, {
+    return this.http.patch(`${API_URL_LEAVE}${id}/status`, updateData, {
       headers: this.createHeaders(),
     });
   }
   postLeaveRequest(leaveRequestData: any): Observable<any> {
-    return this.http.post(API_URL, leaveRequestData, {
+    return this.http.post(API_URL_LEAVE, leaveRequestData, {
       headers: this.createHeaders(),
     });
   }
   getLeavesForUser(userName: string): Observable<any[]> {
-    return this.http.get<any[]>(`${API_URL}user/${userName}`, {
+    return this.http.get<any[]>(`${API_URL_LEAVE}user/${userName}`, {
       headers: this.createHeaders(),
     });
   }

@@ -29,9 +29,9 @@ export class StorageService {
   public getRole(): any {
     const user = window.sessionStorage.getItem(USER_KEY);
     if (user) {
-      const parsedUser = JSON.parse(user); // Parse the user JSON string
-      console.log("Role is: " + parsedUser.role); // Access the role property
-      return parsedUser.role; // Return the role
+      const parsedUser = JSON.parse(user);
+      console.log("Role is: " + parsedUser.role);
+      return parsedUser.role;
     }
   
     return null;
