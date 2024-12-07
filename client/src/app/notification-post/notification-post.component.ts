@@ -18,7 +18,7 @@ export class NotificationPostComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      this.username = params.get('username'); // Extract username from URL
+      this.username = params.get('username');
     });
   }
 

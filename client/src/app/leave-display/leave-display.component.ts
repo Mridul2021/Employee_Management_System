@@ -10,22 +10,19 @@ export class LeaveDisplayComponent implements OnInit {
   userName: string | null = '';  // Store the username
   leaves: any[] = [];            // Store leave data
 
-  constructor(private leaveService: LeaveService) {}
+  constructor(private leaveService: LeaveService) { }
 
   ngOnInit(): void {
-    // Fetch the auth-user object from sessionStorage
     const authUser = sessionStorage.getItem('auth-user');
-    
-    // If auth-user exists, parse it and fetch the username
+
     if (authUser) {
       const parsedUser = JSON.parse(authUser);
-      this.userName = parsedUser.username;  // Extract username from the object
-    
-      // If username is available, fetch the leave data
+      this.userName = parsedUser.username;
+
       if (this.userName) {
         this.leaveService.getLeavesForUser(this.userName).subscribe(
           (data) => {
-            this.leaves = data;  // Store leave data in the leaves array
+            this.leaves = data;
             console.log(data);
           },
           (error) => {

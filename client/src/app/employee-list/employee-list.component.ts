@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 export class EmployeeListComponent implements OnInit {
   employees: any[] = [];
   selectedEmployee: any = null;
-  employeeToDelete: any = null; // For tracking the employee to be deleted
-  showDeleteModal: boolean = false; // For toggling delete modal
+  employeeToDelete: any = null;
+  showDeleteModal: boolean = false;
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -19,7 +19,6 @@ export class EmployeeListComponent implements OnInit {
     this.fetchEmployees();
   }
 
-  // Fetch employees from the API
   fetchEmployees(): void {
     this.userService.getAllUsers().subscribe(
       (data) => {
@@ -32,29 +31,24 @@ export class EmployeeListComponent implements OnInit {
     );
   }
 
-  // Show more information about the employee
   showMoreInfo(employee: any): void {
     this.selectedEmployee = employee;
   }
 
-  // Close the modal
   closeModal(): void {
     this.selectedEmployee = null;
   }
 
-  // Open delete modal
   confirmDelete(employee: any): void {
     this.employeeToDelete = employee;
     this.showDeleteModal = true;
   }
 
-  // Close delete modal
   closeDeleteModal(): void {
     this.showDeleteModal = false;
     this.employeeToDelete = null;
   }
 
-  // Delete the employee
   deleteEmployee(): void {
     if (this.employeeToDelete) {
       this.userService.deleteUser(this.employeeToDelete.username).subscribe(
@@ -63,7 +57,7 @@ export class EmployeeListComponent implements OnInit {
           this.employees = this.employees.filter(
             (emp) => emp.username !== this.employeeToDelete.username
           );
-          this.closeDeleteModal(); // Close modal after deletion
+          this.closeDeleteModal();
         },
         (error) => {
           console.error('Error deleting employee:', error);

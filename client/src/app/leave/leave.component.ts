@@ -20,7 +20,7 @@ export class LeaveComponent implements OnInit {
     private leaveService: LeaveService,
     private userService: UserService, // User service to fetch user data
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.fetchLeaves();
@@ -80,17 +80,16 @@ export class LeaveComponent implements OnInit {
     this.showApproveModal = true;
   }
 
-  // Confirm approve action
   confirmApprove(): void {
     const approvalDate = new Date().toISOString();
     this.leaveService
-      .updateLeaveStatus(this.leaveToApprove.id, 'Approved', approvalDate)  // Use _id from MongoDB
+      .updateLeaveStatus(this.leaveToApprove.id, 'Approved', approvalDate)
       .subscribe(
         (response) => {
           console.log('Leave approved:', response);
           this.leaveToApprove.status = 'Approved';
           this.leaveToApprove.approvalDate = approvalDate;
-          this.showApproveModal = false; // Close modal after approval
+          this.showApproveModal = false;
         },
         (error) => {
           console.log(this.leaveToApprove._id);
@@ -99,13 +98,11 @@ export class LeaveComponent implements OnInit {
       );
   }
 
-  // Close modals
   closeModal(): void {
     this.selectedLeave = null;
     this.leaveToApprove = null;
   }
 
-  // Open delete modal (if necessary)
   confirmDelete(leave: any): void {
     this.selectedLeave = leave;
     this.showDeleteModal = true;

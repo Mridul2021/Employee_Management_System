@@ -23,7 +23,6 @@ export class EditEmployeeComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder
   ) {
-    // Initialize the form without username control
     this.form = this.fb.group({
       username: this.username,
       email: ['', [Validators.required, Validators.email]],
@@ -42,20 +41,17 @@ export class EditEmployeeComponent implements OnInit {
   }    
 
   ngOnInit(): void {
-    // Get the username from the route
     this.username = this.route.snapshot.paramMap.get('username')!;
     console.log(this.username);
-    // Load user data
     this.loadUserData();
   }
 
   loadUserData(): void {
     this.userService.getEmployeeDetails(this.username).subscribe({
       next: (data) => {
-        // Set the form values excluding the username
         this.form.patchValue({
           email: data.email,
-          password: '', // Do not pre-fill password
+          password: '',
           role: data.role,
           information: {
             EmployeeId: data.information.EmployeeId,
@@ -78,12 +74,8 @@ export class EditEmployeeComponent implements OnInit {
   onSubmit(): void {
     console.log("Submitting form with username:", this.username);
     console.log(this.form.value);
-  
-    // Destructure the form value
-    const { email, password, role, information } = this.form.value;
-  
-    // Modify information object to match the backend format
-    const formattedInformation = {
+      const { email, password, role, information } = this.form.value;
+      const formattedInformation = {
       EmployeeId: information.EmployeeId,
       Name: information.Name,
       Phone: information.Phone,
@@ -92,12 +84,11 @@ export class EditEmployeeComponent implements OnInit {
       DateOfJoining: information.DateOfJoining
     };
   
-    // Send the formatted data to the backend
     this.userService.updateInfo(this.username, email, role, formattedInformation).subscribe({
       next: (data) => {
         this.isUpdateSuccessful = true;
         this.isUpdateFailed = false;
-        this.dialogMessage = data;  // Directly use the response text
+        this.dialogMessage = data;
         console.log("Update success:", data);
         this.showDialog = true;
       },

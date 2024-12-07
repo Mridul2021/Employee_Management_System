@@ -40,21 +40,21 @@ export class RegisterComponent {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
         this.dialogMessage = 'User registered successfully!';
-        this.showDialog = true; // Show success dialog
+        this.showDialog = true;
       },
       error: err => {
         this.isSuccessful = false;
         this.isSignUpFailed = true;
-        this.dialogMessage = 'Signup failed, check the data'; // Show error message
-        this.showDialog = true; // Show dialog for failure
+        this.dialogMessage = 'Signup failed, check the data';
+        this.showDialog = true;
       }
     });
   }
 
   onDialogClose(): void {
-    this.showDialog = false; // Hide the dialog box
+    this.showDialog = false;
     if (this.isSuccessful) {
-      this.router.navigate(['/empdetails']); // Navigate to /empdetails if successful
+      this.router.navigate(['/empdetails']);
     }
   }
 }

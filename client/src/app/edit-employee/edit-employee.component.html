@@ -1,7 +1,6 @@
 <div class="w-full max-w-md mx-auto mt-12">
     <div class="bg-gray-100 p-8 rounded-md shadow-md">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <!-- Row 1: Username and Email -->
         <div class="mb-4 flex gap-4">
           <div class="flex-1">
             <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
@@ -15,7 +14,6 @@
           </div>
         </div>
   
-        <!-- Row 2: Password and Role -->
         <div class="mb-4 flex gap-4">
             <div class="flex-1">
                 <label for="DateOfJoining" class="block text-sm font-medium text-gray-700">Date of Joining</label>
@@ -39,7 +37,6 @@
           </div>
         </div>
   
-        <!-- Row 3: Employee Info -->
         <div formGroupName="information" class="mb-4">
           <div>
             <label for="EmployeeId" class="block text-sm font-medium text-gray-700">Employee ID</label>
@@ -51,7 +48,6 @@
             />
           </div>
   
-          <!-- Row 4: Name and Phone -->
           <div class="mb-4 flex gap-4">
             <div class="flex-1">
               <label for="Name" class="block text-sm font-medium text-gray-700">Name</label>

@@ -1,4 +1,3 @@
-// performance.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PerformanceService } from '../_services/performance.service';
@@ -20,7 +19,7 @@ export class PerformancePostComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      this.username = params.get('username'); // Extract username from URL
+      this.username = params.get('username');
     });
   }
 
@@ -31,7 +30,6 @@ export class PerformancePostComponent implements OnInit {
         .subscribe(
           (response) => {
             console.log('Performance review submitted', response);
-            // Redirect or show success message
           },
           (error) => {
             console.error('Error submitting review', error);

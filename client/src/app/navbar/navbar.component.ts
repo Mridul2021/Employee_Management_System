@@ -8,12 +8,12 @@ import { EventBusService } from '../_shared/event-bus.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule], // Add CommonModule here
+  imports: [CommonModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  drawerOpen = false; // State variable to control drawer visibility
+  drawerOpen = false;
   isLoggedIn = false;
   isAdmin=false;
   user: any;
@@ -53,9 +53,9 @@ export class NavbarComponent {
     this.authService.logout().subscribe({
       next: () => {
         this.storageService.clean();
-        this.drawerOpen = false; // Close the drawer if open
+        this.drawerOpen = false;
         this.isLoggedIn = false;
-        window.location.href = '/login'; // Redirect to login page
+        window.location.href = '/login';
       },
       error: (err) => {
         console.error('Logout error:', err);

@@ -48,13 +48,11 @@ export class DepartmentComponent implements OnInit {
     this.showDeleteModal = true;
   }
 
-  // Close delete modal
   closeDeleteModal(): void {
     this.showDeleteModal = false;
     this.departmentToDelete = null;
   }
 
-  // Delete the department
   deleteDepartment(): void {
     if (this.departmentToDelete) {
       this.departmentService.deleteDepartment(this.departmentToDelete.departmentId).subscribe(
@@ -64,7 +62,7 @@ export class DepartmentComponent implements OnInit {
           this.departments = this.departments.filter(
             (dept) => dept.departmentId !== this.departmentToDelete.departmentId
           );
-          this.closeDeleteModal(); // Close modal after deletion
+          this.closeDeleteModal();
         },
         (error) => {
           console.error('Error deleting department:', error);
@@ -73,7 +71,6 @@ export class DepartmentComponent implements OnInit {
     }
   }
 
-  // Edit department
   editDepartment(id: string): void {
     this.router.navigate(['/edit-department', id]);
   }

@@ -9,7 +9,7 @@ import { NotificationService } from '../_services/NotificationService';
 })
 export class ViewNotificationComponent implements OnInit {
   username: string | null = null;
-  notifications: any[] = []; // Array to hold notifications
+  notifications: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -17,7 +17,6 @@ export class ViewNotificationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Fetch the username from the route parameters
     this.route.paramMap.subscribe((params) => {
       this.username = params.get('username');
       if (this.username) {
@@ -26,7 +25,6 @@ export class ViewNotificationComponent implements OnInit {
     });
   }
 
-  // Function to get notifications for the username
   getNotifications(username: string): void {
     this.notificationService.getNotifications(username).subscribe(
       (response) => {

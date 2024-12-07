@@ -1,68 +1,140 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="profile-img-card"
-    />
-    @if (!isLoggedIn) {
-    <form
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          [(ngModel)]="form.username"
-          required
-          #username="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
-        />
-        @if (username.errors && f.submitted) {
-        <div class="invalid-feedback">Username is required!</div>
-        }
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-        />
-        @if (password.errors && f.submitted) {
-        <div class="invalid-feedback">
-          @if (password.errors['required']) {
-          <div>Password is required</div>
-          }
-          @if (password.errors['minlength']) {
-          <div>Password must be at least 6 characters</div>
+<div>
+  @if (!isLoggedIn) {
+  <div
+    style="
+      max-width: 400px;
+      padding: 40px 40px;
+      background-color: #f7f7f7;
+      margin: 50px auto 25px;
+      border-radius: 2px;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    "
+  >
+    <div>
+      <img
+        id="profile-img"
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        style="
+          width: 96px;
+          height: 96px;
+          margin: 0 auto 10px;
+          display: block;
+          border-radius: 50%;
+        "
+      />
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div>
+          <label style="display: block; margin-top: 10px" for="username"
+            >Username</label
+          >
+          <input
+            type="text"
+            style="width: 100%; padding: 10px; margin: 5px 0"
+            name="username"
+            [(ngModel)]="form.username"
+            required
+            #username="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+          />
+          @if (username.errors && f.submitted) {
+          <div style="color: red">Username is required!</div>
           }
         </div>
-        }
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">Login</button>
-      </div>
-      <div class="form-group">
-        @if (f.submitted && isLoginFailed) {
-        <div class="alert alert-danger" role="alert">
-          Login failed: {{ errorMessage }}
+        <div>
+          <label style="display: block; margin-top: 10px" for="password"
+            >Password</label
+          >
+          <input
+            type="password"
+            style="width: 100%; padding: 10px; margin: 5px 0"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+          />
+          @if (password.errors && f.submitted) {
+          <div style="color: red">
+            @if (password.errors['required']) {
+            <div>Password is required</div>
+            } @if (password.errors['minlength']) {
+            <div>Password must be at least 6 characters</div>
+            }
+          </div>
+          }
         </div>
-        }
-      </div>
-    </form>
-    } @else {
-    <div class="alert alert-success">Logged in as {{ roles }}.</div>
-    }
+        <div>
+          <button
+            style="
+              background-color: #007bff;
+              color: white;
+              padding: 10px;
+              width: 100%;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+            "
+          >
+            Login
+          </button>
+        </div>
+        <div>
+          @if (f.submitted && isLoginFailed) {
+          <div
+            style="
+              background-color: #f8d7da;
+              color: #721c24;
+              padding: 10px;
+              border-radius: 5px;
+            "
+            role="alert"
+          >
+            Login failed: {{ errorMessage }}
+          </div>
+          }
+        </div>
+      </form>
+    </div>
   </div>
+  } @else {
+    <div
+    style="
+      padding: 30px;
+      text-align: center;
+      background: linear-gradient(145deg, #ffffff, #f3f4f6);
+      border-radius: 15px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    "
+  >
+    <div style="margin-bottom: 20px;">
+      <img
+        src="https://static.vecteezy.com/system/resources/previews/009/170/419/non_2x/a-unique-design-icon-of-employee-management-vector.jpg"
+        alt="Employee Management Logo"
+        style="
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          display: block;
+          margin: 0 auto 15px;
+        "
+      />
+      <h1 style="color: #4a90e2; font-size: 2.5rem; margin-bottom: 10px;">
+        Welcome to Employee Management System
+      </h1>
+    </div>
+    <p style="color: #6c757d; font-size: 1.2rem; margin-bottom: 30px;">
+      Seamlessly manage employees, track performance, and ensure efficient
+      operations. You are successfully logged in as
+      <strong>{{ role }}</strong>.
+    </p>
+    
+  </div>
+  }
 </div>
