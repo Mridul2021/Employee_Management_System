@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { LeaveService } from '../_services/leave.service'; // Import the LeaveService
+import { Router } from '@angular/router';
+import { LeaveService } from '../_services/leave.service';
 
 @Component({
   selector: 'app-leave-request',
   templateUrl: './leave-request.component.html',
-  styleUrls: ['./leave-request.component.css']
+  styleUrls: ['./leave-request.component.css'],
 })
 export class LeaveRequestComponent {
   leaveRequest = {
@@ -14,10 +15,12 @@ export class LeaveRequestComponent {
     endDate: '',
     reason: '',
     status: 'Pending',
-    approvalDate: null
+    approvalDate: null,
   };
+  showConfirmation: boolean = false;
 
-  constructor(private leaveService: LeaveService) {
+  constructor(private leaveService: LeaveService, private router: Router) {
+    // Get user info from session storage
     const user = sessionStorage.getItem('auth-user');
     if (user) {
       const parsedUser = JSON.parse(user);
@@ -26,24 +29,20 @@ export class LeaveRequestComponent {
   }
 
   submitLeaveRequest() {
-    const leaveRequestData = {
-      userName: this.leaveRequest.userName,
-      LeaveType: this.leaveRequest.leaveType,
-      StartDate: this.leaveRequest.startDate,
-      EndDate: this.leaveRequest.endDate,
-      Reason: this.leaveRequest.reason,
-      Status: this.leaveRequest.status,
-      ApprovalDate: this.leaveRequest.approvalDate
-    };
-
-    this.leaveService.postLeaveRequest(leaveRequestData).subscribe(
+    console.log(this.leaveRequest);
+    this.leaveService.postLeaveRequest(this.leaveRequest).subscribe(
       (response) => {
         console.log('Leave request submitted successfully', response);
+        this.showConfirmation = true;
       },
       (error) => {
-        console.log(leaveRequestData);
         console.error('Error submitting leave request', error);
       }
     );
+  }
+
+  navigateToDashboard(): void {
+    this.showConfirmation = false;
+    this.router.navigate(['/login']);
   }
 }

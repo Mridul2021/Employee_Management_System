@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { StorageService } from '../_services/storage.service';
 import { AuthService } from '../_services/auth.service';

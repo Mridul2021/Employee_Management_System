@@ -10,6 +10,7 @@ import { PerformanceService } from '../_services/performance.service';
 export class PerformancePostComponent implements OnInit {
   username: string | null = null;
   remark: string = '';
+  showConfirmation: boolean = false; // To control the confirmation dialog
 
   constructor(
     private route: ActivatedRoute,
@@ -30,11 +31,17 @@ export class PerformancePostComponent implements OnInit {
         .subscribe(
           (response) => {
             console.log('Performance review submitted', response);
+            this.showConfirmation = true; // Show the confirmation dialog
           },
           (error) => {
             console.error('Error submitting review', error);
           }
         );
     }
+  }
+
+  navigateToEmpDetails(): void {
+    this.showConfirmation = false;
+    this.router.navigate(['/empdetails']);
   }
 }
