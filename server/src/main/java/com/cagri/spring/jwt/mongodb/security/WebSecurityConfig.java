@@ -57,8 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authorizeRequests()
-				.antMatchers("/api/auth/**").permitAll()  // Public routes
-				.antMatchers("/api/user/**").authenticated() // Protected routes
+				.antMatchers("/api/auth/**").permitAll()
+				.antMatchers("/api/user/**").authenticated()
 				.anyRequest().authenticated();
 
 		// Add the JWT Token Filter before processing authentication
